@@ -1,0 +1,24 @@
+{
+  "identifier": "com.github.jbrudvik.nova-go-formatter",
+  "name": "Go Formatter",
+  "organization": "Jeremy Brudvik",
+  "description": "Formats Go files",
+  "version": "0.0.1",
+  "categories": ["formatters"],
+  "repository": "https://github.com/jbrudvik/nova-go-formatter",
+  "main": "main.js",
+  "activationEvents": ["onLanguage:go"],
+  "entitlements": {
+    "process": true,
+    "filesystem": "readonly"
+  },
+  "commands": {
+    "editor": [
+      {
+        "title": "Format Go file",
+        "command": "go-formatter.goFormat",
+        "when": "editorHasFocus && editorSyntax == 'go'"
+      }
+    ]
+  }
+}
