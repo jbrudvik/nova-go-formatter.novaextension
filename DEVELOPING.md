@@ -38,8 +38,8 @@ Next, open the extension console to review `Go Formatter` log messages: **Extens
 Finally, try each of the usage paths:
 
 - Save a Go file. Go Formatter will automatically format the file you are saving.
-- Select the **Editor → Format Go file** menu item; or
-- Open the command palette and type `Format Go file`
+- Select the **Editor → Format Go code** menu item; or
+- Open the command palette and type `Format Go code`
 
 ## Releasing
 

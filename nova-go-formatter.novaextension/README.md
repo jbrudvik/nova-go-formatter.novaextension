@@ -1,4 +1,4 @@
-Go Formatter formats [Go](https://go.dev) files using [`gofmt`](https://pkg.go.dev/cmd/gofmt):
+Go Formatter formats [Go](https://go.dev) code using [`gofmt`](https://pkg.go.dev/cmd/gofmt):
 
 - On every save
 - When you select the menu item
@@ -13,7 +13,7 @@ Go Formatter requires [`gofmt`](https://pkg.go.dev/cmd/gofmt) to be installed. `
 There are three ways to run Go Formatter:
 
 - Save a Go file. Go Formatter will automatically format the file you are saving.
-- Select the **Editor → Format Go file** menu item; or
-- Open the command palette and type `Format Go file`
+- Select the **Editor → Format Go code** menu item; or
+- Open the command palette and type `Format Go code`
 
 If Go Formatter fails to run successfully (e.g., `gofmt` fails to run), you'll see a Nova notification with error messages. If you run into an issue that you think Go Formatter should handle, please [submit a bug report](https://github.com/jbrudvik/nova-go-formatter/issues).

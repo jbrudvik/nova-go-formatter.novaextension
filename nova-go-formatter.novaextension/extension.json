@@ -2,7 +2,7 @@
   "identifier": "me.brudvik.nova-go-formatter",
   "name": "Go Formatter",
   "organization": "Jeremy Brudvik",
-  "description": "Formats Go files",
+  "description": "Formats Go code",
   "version": "0.0.1",
   "categories": ["commands", "formatters"],
   "repository": "https://github.com/jbrudvik/nova-go-formatter",
@@ -17,7 +17,7 @@
   "commands": {
     "editor": [
       {
-        "title": "Format Go file",
+        "title": "Format Go code",
         "command": "go-formatter.goFormat",
         "when": "editorHasFocus && editorSyntax == 'go'"
       }
