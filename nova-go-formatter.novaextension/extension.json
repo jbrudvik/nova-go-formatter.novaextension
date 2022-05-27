@@ -3,7 +3,7 @@
   "name": "Go Formatter",
   "organization": "Jeremy Brudvik",
   "description": "Formats Go code",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "categories": ["commands", "formatters"],
   "repository": "https://github.com/jbrudvik/nova-go-formatter",
   "bugs": "https://github.com/jbrudvik/nova-go-formatter/issues",
