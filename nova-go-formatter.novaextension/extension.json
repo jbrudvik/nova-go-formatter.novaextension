@@ -4,8 +4,10 @@
   "organization": "Jeremy Brudvik",
   "description": "Formats Go files",
   "version": "0.0.1",
-  "categories": ["formatters"],
+  "categories": ["commands", "formatters"],
   "repository": "https://github.com/jbrudvik/nova-go-formatter",
+  "bugs": "https://github.com/jbrudvik/nova-go-formatter/issues",
+  "license": "MIT",
   "main": "main.js",
   "activationEvents": ["onLanguage:go"],
   "entitlements": {
