@@ -20,6 +20,12 @@ async function writeDocument(editor, content) {
 }
 
 async function formatGoFile(editor) {
+  // Doubly-ensure that only Go files are formatted
+  // Nova should handle this based on extension metadata, but appears to not always do so
+  if (editor.document.syntax !== "go") {
+    return Promise.resolve(null);
+  }
+
   let resolve;
   let reject;
   const promise = new Promise((_resolve, _reject) => {
