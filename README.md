@@ -13,3 +13,9 @@ If Go Formatter fails to run (e.g., `gofmt` fails to run), you'll see a Nova not
 ## Requirements
 
 Go Formatter requires [`gofmt`](https://pkg.go.dev/cmd/gofmt) to be installed. `gofmt` is included with the official [Go installer](https://go.dev/dl). Additionally, `gofmt` must be visible in your environment (e.g., via your `PATH` variable).
+
+## Install
+
+Install in Nova by selecting **Extensions → Extension Library...**, searching for **Go Formatter**, and clicking the **Install** button.
+
+Alternatively, follow this direct link to [Go Formatter](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/) and click the **Install** button.
