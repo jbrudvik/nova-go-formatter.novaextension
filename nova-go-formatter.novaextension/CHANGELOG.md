@@ -1,3 +1,7 @@
+## Version 0.0.3
+
+Clean up documentation
+
 ## Version 0.0.2
 
 Run gofmt on contents of code buffers, not files
