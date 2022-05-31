@@ -20,12 +20,6 @@ async function writeDocument(editor, content) {
 }
 
 async function formatGoCode(editor) {
-  // Doubly-ensure that only Go code is formatted
-  // Nova should handle this based on extension metadata, but appears to not always do so
-  if (editor.document.syntax !== "go") {
-    return Promise.resolve(null);
-  }
-
   const options = {
     args: ["gofmt"],
   };
@@ -88,11 +82,18 @@ async function formatGoCode(editor) {
   return promise;
 }
 
-exports.activate = async () => {
-  nova.commands.register("go-formatter.goFormat", formatGoCode);
+// Menu item + Command
+nova.commands.register("go-formatter.goFormat", formatGoCode);
 
+exports.activate = async () => {
+  // On save
   nova.workspace.onDidAddTextEditor((editor) => {
-    editor.onWillSave(formatGoCode);
+    // Ensure that only Go code is automatically formatted
+    // Nova should handle this based on extension metadata, but appears to not always do so
+    if (editor.document.syntax === "go") {
+      console.log("Attaching onWillSave listener");
+      editor.onWillSave(formatGoCode);
+    }
   });
 };
 

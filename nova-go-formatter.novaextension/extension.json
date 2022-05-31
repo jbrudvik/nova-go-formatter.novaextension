@@ -19,7 +19,7 @@
       {
         "title": "Format Go code",
         "command": "go-formatter.goFormat",
-        "when": "editorHasFocus && editorSyntax == 'go'"
+        "when": "editorHasFocus"
       }
     ]
   }
