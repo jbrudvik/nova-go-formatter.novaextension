@@ -16,5 +16,7 @@ module.exports = {
   rules: {
     quotes: ["error", "double"],
     "no-console": "off",
+    "comma-dangle": ["error", "only-multiline"],
+    "operator-linebreak": "off",
   },
 };

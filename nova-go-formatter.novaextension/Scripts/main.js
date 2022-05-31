@@ -8,37 +8,21 @@ function displayError(message) {
   nova.notifications.add(request).catch((err) => console.error(err, err.stack));
 }
 
-async function writeDocument(editor, content) {
-  const rangeEntireDocument = new Range(0, editor.document.length);
-  await editor.edit((edit) => {
-    // Only write if there are changes
-    const originalText = editor.getTextInRange(rangeEntireDocument);
-    if (originalText !== content) {
-      edit.replace(rangeEntireDocument, content);
-    }
-  });
+function stringPreview(s, previewLength) {
+  return s.length <= previewLength ? s : `${s.substring(0, previewLength)}...`;
 }
 
-async function formatGoCode(editor) {
+function gofmt(originalCode) {
   const options = {
     args: ["gofmt"],
   };
   const process = new Process("/usr/bin/env", options);
 
-  const operationTitle = "Format Go code";
-  const command = `$ ${process.command} ${process.args.join(" ")}`;
-  let errorMessage = `Error when attempting to format Go code (via stdin): ${command}`;
-
-  // Get original code
-  const rangeEntireDocument = new Range(0, editor.document.length);
-  let originalCode = "";
-  try {
-    originalCode = await editor.getTextInRange(rangeEntireDocument);
-  } catch (e) {
-    errorMessage += `\n\nUnable to read Go code\n\n${e}`;
-    displayError(errorMessage);
-    return Promise.reject(errorMessage);
-  }
+  const originalCodePreview = stringPreview(originalCode, 50);
+  const command = `$ ${process.command} ${process.args.join(
+    " "
+  )} <<< """${originalCodePreview}"""`;
+  let errorMessage = command;
 
   // gofmt: stdin
   const writer = process.stdin.getWriter();
@@ -67,12 +51,8 @@ async function formatGoCode(editor) {
   });
   process.onDidExit((exitCode) => {
     if (exitCode === 0) {
-      writeDocument(editor, formattedCode);
-      const successMessage = `${operationTitle}: Success`;
-      console.log(successMessage);
-      resolve(null);
+      resolve(formattedCode);
     } else {
-      displayError(errorMessage);
       reject(errorMessage);
     }
   });
@@ -82,8 +62,41 @@ async function formatGoCode(editor) {
   return promise;
 }
 
+async function writeDocument(editor, content) {
+  const rangeEntireDocument = new Range(0, editor.document.length);
+  await editor.edit((edit) => {
+    // Only write if there are changes
+    const originalText = editor.getTextInRange(rangeEntireDocument);
+    if (originalText !== content) {
+      edit.replace(rangeEntireDocument, content);
+    }
+  });
+}
+
+async function formatGoCodeInEditor(editor) {
+  const errorMessageStart = "Error when attempting to format Go code";
+
+  // Get original code
+  const rangeEntireDocument = new Range(0, editor.document.length);
+  let originalCode = "";
+  try {
+    originalCode = await editor.getTextInRange(rangeEntireDocument);
+  } catch (e) {
+    displayError(`${errorMessageStart}: Unable to read Go code\n\n${e}`);
+  }
+
+  // Run go fmt
+  try {
+    const formattedCode = await gofmt(originalCode);
+    writeDocument(editor, formattedCode);
+    console.log("Format Go code: Success");
+  } catch (e) {
+    displayError(`${errorMessageStart}: Failed to run gofmt command\n\n${e}`);
+  }
+}
+
 // Menu item + Command
-nova.commands.register("go-formatter.goFormat", formatGoCode);
+nova.commands.register("go-formatter.goFormat", formatGoCodeInEditor);
 
 exports.activate = async () => {
   // On save
@@ -91,7 +104,7 @@ exports.activate = async () => {
     // Ensure that only Go code is automatically formatted
     // Nova should handle this based on extension metadata, but appears to not always do so
     if (editor.document.syntax === "go") {
-      editor.onWillSave(formatGoCode);
+      editor.onWillSave(formatGoCodeInEditor);
     }
   });
 };
