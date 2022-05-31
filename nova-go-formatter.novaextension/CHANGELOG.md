@@ -1,3 +1,7 @@
+## Version 0.0.4
+
+Allow formatting of non-Go files (e.g., text buffers) with "Format Go code" command and menu item
+
 ## Version 0.0.3
 
 Clean up documentation
