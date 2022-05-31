@@ -91,7 +91,6 @@ exports.activate = async () => {
     // Ensure that only Go code is automatically formatted
     // Nova should handle this based on extension metadata, but appears to not always do so
     if (editor.document.syntax === "go") {
-      console.log("Attaching onWillSave listener");
       editor.onWillSave(formatGoCode);
     }
   });
