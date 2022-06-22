@@ -16,6 +16,6 @@ Go Formatter requires [`gofmt`](https://pkg.go.dev/cmd/gofmt) to be installed. `
 
 ## Install
 
-Install in Nova by selecting **Extensions → Extension Library...**, searching for **Go Formatter**, and clicking the **Install** button.
+[Go Formatter at Nova's Extension Library](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/)
 
-Alternatively, follow this direct link to [Go Formatter at Nova's Extension Library website](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/) and click the **Install** button.
+Or, install using Nova by selecting **Extensions → Extension Library...**, searching for **Go Formatter**, and clicking the **Install** button.
