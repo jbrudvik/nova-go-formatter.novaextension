@@ -1,4 +1,4 @@
-# Go Formatter, a Nova extension
+# Go Formatter for Nova
 
 Go Formatter is a [Nova](https://nova.app) extension that formats [Go](https://go.dev) code using [`gofmt`](https://pkg.go.dev/cmd/gofmt).
 
