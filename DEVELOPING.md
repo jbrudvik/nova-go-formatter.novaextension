@@ -10,21 +10,17 @@ The actual code for the extension sits in `nova-go-formatter.novaextension`. Ope
 
 - Install [Node.js](https://nodejs.org/en/download/)
 - Install Node project dependencies for running [ESLint](https://eslint.org): `$ npm install`
-- Install the [ESLint Extension for Nova](https://github.com/apexskier/nova-eslint)
-
-# Requirements
-
-Go Formatter requires [`gofmt`](https://pkg.go.dev/cmd/gofmt) to be installed. `gofmt` is included with the official [Go installer](https://go.dev/dl). Additionally, `gofmt` must be visible in your environment (e.g., via your `PATH` variable).
+- Install [`gofmt`](https://pkg.go.dev/cmd/gofmt). `gofmt` is included with the official [Go installer](https://go.dev/dl). Additionally, `gofmt` must be visible in your environment (e.g., via your `PATH` variable).
 
 ## Before committing
 
-### Ensure there are no ESLint issues
+- Format JavaScript files with Prettier
+  - Prettier can be run inside Nova using [Prettier for Nova](https://extensions.panic.com/extensions/alexanderweiss/alexanderweiss.prettier/)
+- Fix any ESLint issues
+  - ESLint can be run inside Nova using [ESLint Extension for Nova](https://extensions.panic.com/extensions/apexskier/apexskier.eslint/)
+  - Alternatively, you may view ESLint issues on the command line: `$ ./node_modules/.bin/eslint . `
 
-ESLint issues will appear in Nova's Issues pane. If there are any issues, fix them.
-
-Alternatively, you may view ESLint issues on the command line: `$ ./node_modules/.bin/eslint . `
-
-### Ensure the extension functions as expected
+## Manual testing
 
 First, activate the extension: **Extensions → Activate Project as Extension**.
 
