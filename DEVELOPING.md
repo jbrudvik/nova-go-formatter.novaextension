@@ -9,7 +9,7 @@ The actual code for the extension sits in `nova-go-formatter.novaextension`. Ope
 ### Install development dependencies
 
 - Install [Node.js](https://nodejs.org/en/download/)
-- Install Node project dependencies for running [ESLint](https://eslint.org): `$ npm install -g eslint`
+- Install Node project dependencies: `$ npm install`
 - Install [`gofmt`](https://pkg.go.dev/cmd/gofmt). `gofmt` is included with the official [Go installer](https://go.dev/dl). Additionally, `gofmt` must be visible in your environment (e.g., via your `PATH` variable).
 
 ## Before committing
