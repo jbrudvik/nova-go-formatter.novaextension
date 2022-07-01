@@ -1,6 +1,6 @@
 # Go Formatter for Nova
 
-Go Formatter is a [Nova](https://nova.app) extension that formats [Go](https://go.dev) code using [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports) or [`gofmt`](https://pkg.go.dev/cmd/gofmt).
+[Go Formatter](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/) is a [Nova](https://nova.app) extension that formats [Go](https://go.dev) code using [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports) or [`gofmt`](https://pkg.go.dev/cmd/gofmt).
 
 There are three ways to run Go Formatter:
 
@@ -26,3 +26,9 @@ To use `gofmt`:
 ## Issues
 
 If Go Formatter fails to run, error messages will be shown as a Nova notification. If you run into an issue that you think Go Formatter should handle, please [submit a bug report](https://github.com/jbrudvik/nova-go-formatter/issues).
+
+## Install
+
+[Go Formatter at Nova's Extension Library](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/)
+
+Or, install using Nova by selecting **Extensions → Extension Library...**, searching for **Go Formatter**, and clicking the **Install** button.
