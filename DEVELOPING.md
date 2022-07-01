@@ -37,6 +37,7 @@ Usage paths to test:
 Variables for usage paths:
 
 - `"Use goimports if available"` preference option checked/unchecked
+- `"Format Go files on save"` preference option checked/unchecked
 - Underlying dependencies installed and available (e.g., on `PATH`):
   - `goimports`
   - `gofmt`

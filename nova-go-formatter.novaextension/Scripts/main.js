@@ -179,13 +179,22 @@ nova.commands.register(
   formatGoCodeInEditor
 );
 
+function formatGoCodeInEditorOnSave(editor) {
+  const formatGoFilesOnSave = nova.config.get(
+    `${nova.extension.identifier}.format-go-files-on-save`
+  );
+  if (formatGoFilesOnSave) {
+    formatGoCodeInEditor(editor);
+  }
+}
+
 exports.activate = async () => {
   // On save
   nova.workspace.onDidAddTextEditor((editor) => {
     // Ensure that only Go code is automatically formatted
     // Nova should handle this based on extension metadata, but appears to not always do so
     if (editor.document.syntax === "go") {
-      editor.onWillSave(formatGoCodeInEditor);
+      editor.onWillSave(formatGoCodeInEditorOnSave);
     }
   });
 };
