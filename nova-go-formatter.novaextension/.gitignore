@@ -1,1 +1,3 @@
 .DS_Store
+nova-go-formatter.novaextension/package-lock.json
+nova-go-formatter.novaextension/node_modules

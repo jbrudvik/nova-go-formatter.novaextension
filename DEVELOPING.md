@@ -47,7 +47,7 @@ Variables for usage paths:
 
 Releases are manually created with these steps:
 
-1. Delete the `node_modules` directory, if it exists
+1. Delete `node_modules/` and `package-lock.json`
 1. Increment the version in `extension.json`
 1. Update the release notes in `CHANGELOG.md`
 1. Make any necessary updates to `README.md`. This contains the user-facing documentation in the Nova Extension Library.
