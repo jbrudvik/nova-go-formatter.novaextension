@@ -2,7 +2,7 @@
   "identifier": "me.brudvik.nova-go-formatter",
   "name": "Go Formatter",
   "organization": "Jeremy Brudvik",
-  "description": "Formats Go code",
+  "description": "Formats Go code using goimports or gofmt",
   "version": "0.0.4",
   "categories": ["commands", "formatters"],
   "repository": "https://github.com/jbrudvik/nova-go-formatter",
@@ -18,9 +18,18 @@
     "editor": [
       {
         "title": "Format Go code",
-        "command": "go-formatter.goFormat",
+        "command": "me.brudvik.nova-go-formatter.goFormat",
         "when": "editorHasFocus"
       }
     ]
-  }
+  },
+  "config": [
+    {
+      "key": "me.brudvik.nova-go-formatter.use-goimports-if-available",
+      "title": "Use goimports if available",
+      "description": "Use goimports instead of gofmt. If goimports can't be found, gofmt will be used. Uncheck to always use gofmt.",
+      "type": "boolean",
+      "default": true
+    }
+  ]
 }

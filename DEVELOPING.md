@@ -11,6 +11,7 @@ The actual code for the extension sits in `nova-go-formatter.novaextension`. Ope
 - Install [Node.js](https://nodejs.org/en/download/)
 - Install Node project dependencies: `$ npm install`
 - Install [`gofmt`](https://pkg.go.dev/cmd/gofmt). `gofmt` is included with the official [Go installer](https://go.dev/dl). Additionally, `gofmt` must be visible in your environment (e.g., via your `PATH` variable).
+- Install [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports): `$ go install golang.org/x/tools/cmd/goimports@latest`
 
 ## Before committing
 
@@ -22,15 +23,24 @@ The actual code for the extension sits in `nova-go-formatter.novaextension`. Ope
 
 ## Manual testing
 
-First, activate the extension: **Extensions → Activate Project as Extension**.
+Setup:
 
-Next, open the extension console to review `Go Formatter` log messages: **Extensions → Show Extension Console**.
+1. Activate the extension: **Extensions → Activate Project as Extension**.
+1. Open the extension console to review `Go Formatter` log messages: **Extensions → Show Extension Console**.
 
-Finally, try each of the usage paths:
+Usage paths to test:
 
 - Save a Go file. Go Formatter will automatically format the file you are saving.
 - Select the **Editor → Format Go code** menu item
 - Open the command palette and type `Format Go code`
+
+Variables for usage paths:
+
+- `"Use goimports if available"` preference option checked/unchecked
+- Underlying dependencies installed and available (e.g., on `PATH`):
+  - `goimports`
+  - `gofmt`
+- Filetype: Go, non-Go, unnamed
 
 ## Releasing
 

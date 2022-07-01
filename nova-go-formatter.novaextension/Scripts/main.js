@@ -1,3 +1,11 @@
+function stringPreview(s, previewLength) {
+  return s.length <= previewLength ? s : `${s.substring(0, previewLength)}...`;
+}
+
+function basename(str) {
+  return str.substr(str.lastIndexOf("/") + 1);
+}
+
 function displayError(message) {
   // Log error to console
   console.error(message);
@@ -8,48 +16,104 @@ function displayError(message) {
   nova.notifications.add(request).catch((err) => console.error(err, err.stack));
 }
 
-function stringPreview(s, previewLength) {
-  return s.length <= previewLength ? s : `${s.substring(0, previewLength)}...`;
+function getFilename(editor) {
+  let filename = "untitled";
+  const { path } = editor.document;
+  if (path) {
+    filename = basename(path);
+  }
+  return filename;
 }
 
-function gofmt(originalCode) {
-  const options = {
-    args: ["gofmt"],
-  };
-  const process = new Process("/usr/bin/env", options);
+// Returns a promise containing a formatter process
+// Returned formatter process must:
+// - Read source code from stdin
+// - Output formatter source code to stdout
+// - Output error messages to stderr
+// - Use zero exit code on success; otherwise non-zero exit code
+function getFormatterProcess() {
+  let resolve;
+  const promise = new Promise((_resolve) => {
+    resolve = _resolve;
+  });
 
+  const goimportsCommand = "goimports";
+  const gofmtCommand = "gofmt";
+  const goimportsProcess = new Process("/usr/bin/env", {
+    args: [goimportsCommand],
+  });
+  const gofmtProcess = new Process("/usr/bin/env", {
+    args: [gofmtCommand],
+  });
+
+  const useGoimportsIfAvailable = nova.config.get(
+    `${nova.extension.identifier}.use-goimports-if-available`
+  );
+
+  if (useGoimportsIfAvailable) {
+    const goimportsAvailabilityCheckProcess = new Process("/usr/bin/env", {
+      args: ["command", "-v", goimportsCommand],
+    });
+    goimportsAvailabilityCheckProcess.onDidExit((exitCode) => {
+      if (exitCode === 0) {
+        console.log(
+          "Using goimports: goimports picked in preferences and is also available"
+        );
+        resolve(goimportsProcess);
+      } else {
+        console.log(
+          "Using gofmt: goimports picked in preferences but is not available. To install goimports, run this shell command: $ go install golang.org/x/tools/cmd/goimports@latest"
+        );
+        resolve(gofmtProcess);
+      }
+    });
+    goimportsAvailabilityCheckProcess.start();
+  } else {
+    console.log("Using gofmt: gofmt picked in preferences");
+    resolve(gofmtProcess);
+  }
+  return promise;
+}
+
+// Formatter process must:
+// - Read source code from stdin
+// - Output formatter source code to stdout
+// - Output error messages to stderr
+// - Use zero exit code on success; otherwise non-zero exit code
+function formatGoCode(formatterProcess, originalCode) {
+  // The start of a useful error message
   const originalCodePreview = stringPreview(originalCode, 50);
-  const command = `$ ${process.command} ${process.args.join(
+  const command = `$ ${formatterProcess.command} ${formatterProcess.args.join(
     " "
   )} <<< """${originalCodePreview}"""`;
   let errorMessage = command;
 
-  // gofmt: stdin
-  const writer = process.stdin.getWriter();
+  // stdin: The unformatted code
+  const writer = formatterProcess.stdin.getWriter();
   writer.ready.then(() => {
     writer.write(originalCode);
     writer.close();
   });
 
-  // gofmt: stdout
+  // stdout: The formatted code
   let formattedCode = "";
-  process.onStdout((line) => {
+  formatterProcess.onStdout((line) => {
     formattedCode += line;
   });
 
-  // gofmt: stderr
-  process.onStderr((error) => {
+  // stderr: Error messages during formatting
+  formatterProcess.onStderr((error) => {
     errorMessage += `\n\n${error}`;
   });
 
-  // gofmt: on exit
+  // On exit: Processing is done (successful or not)
   let resolve;
   let reject;
   const promise = new Promise((_resolve, _reject) => {
     resolve = _resolve;
     reject = _reject;
   });
-  process.onDidExit((exitCode) => {
+  formatterProcess.onDidExit((exitCode) => {
     if (exitCode === 0) {
       resolve(formattedCode);
     } else {
@@ -57,7 +121,7 @@ function gofmt(originalCode) {
     }
   });
 
-  process.start();
+  formatterProcess.start();
 
   return promise;
 }
@@ -74,7 +138,20 @@ async function writeDocument(editor, content) {
 }
 
 async function formatGoCodeInEditor(editor) {
-  const errorMessageStart = "Error when attempting to format Go code";
+  const filename = getFilename(editor);
+  const errorMessageStart = "Failure to format Go code";
+  console.log(`Formatting Go code: ${filename}`);
+
+  // Get formatter process
+  let formatterProcess;
+  try {
+    formatterProcess = await getFormatterProcess();
+  } catch (e) {
+    displayError(
+      `${errorMessageStart}: Unable to find Go formatter to use\n\n{e}`
+    );
+    return;
+  }
 
   // Get original code
   const rangeEntireDocument = new Range(0, editor.document.length);
@@ -83,20 +160,24 @@ async function formatGoCodeInEditor(editor) {
     originalCode = await editor.getTextInRange(rangeEntireDocument);
   } catch (e) {
     displayError(`${errorMessageStart}: Unable to read Go code\n\n${e}`);
+    return;
   }
 
-  // Run go fmt
+  // Format Go code
   try {
-    const formattedCode = await gofmt(originalCode);
+    const formattedCode = await formatGoCode(formatterProcess, originalCode);
     writeDocument(editor, formattedCode);
-    console.log("Format Go code: Success");
+    console.log(`Formatted Go code: ${filename}`);
   } catch (e) {
-    displayError(`${errorMessageStart}: Failed to run gofmt command\n\n${e}`);
+    displayError(`${errorMessageStart}: Failed to run Go formatter\n\n${e}`);
   }
 }
 
 // Menu item + Command
-nova.commands.register("go-formatter.goFormat", formatGoCodeInEditor);
+nova.commands.register(
+  `${nova.extension.identifier}.goFormat`,
+  formatGoCodeInEditor
+);
 
 exports.activate = async () => {
   // On save
