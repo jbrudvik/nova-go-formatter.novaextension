@@ -1,3 +1,7 @@
+## Version 0.0.8
+
+Fix bug where format on save was causing dirty buffer
+
 ## Version 0.0.7
 
 Reduce extension size
