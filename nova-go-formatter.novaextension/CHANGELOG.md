@@ -1,3 +1,7 @@
+## Version 0.0.7
+
+Reduce extension size
+
 ## Version 0.0.6
 
 Add an extension preference "Format Go files on save" (checked by default) to make it possible to not format on save (but keep the command + menu item functionality).
