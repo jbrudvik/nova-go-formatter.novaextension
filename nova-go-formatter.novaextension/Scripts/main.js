@@ -184,7 +184,7 @@ function formatGoCodeInEditorOnSave(editor) {
     `${nova.extension.identifier}.format-go-files-on-save`
   );
   if (formatGoFilesOnSave) {
-    formatGoCodeInEditor(editor);
+    return formatGoCodeInEditor(editor);
   }
 }
 
