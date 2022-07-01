@@ -1,3 +1,9 @@
+## Version 0.0.5
+
+Add `goimports` support and make it the new default formatter.
+
+Add an extension preference "Use goimports if available" to control use of goimports vs gofmt.
+
 ## Version 0.0.4
 
 Allow formatting of non-Go files (e.g., text buffers) with "Format Go code" command and menu item
