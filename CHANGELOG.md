@@ -1,3 +1,7 @@
+## Version 0.0.10
+
+Update readme
+
 ## Version 0.0.9
 
 Internal changes: Simplify extension development
