@@ -1,6 +1,14 @@
 {
   "devDependencies": {
     "eslint": "^8.16.0",
-    "eslint-config-airbnb": "^19.0.4"
+    "eslint-config-airbnb": "^19.0.4",
+    "prettier": "2.7.1"
+  },
+  "scripts": {
+    "check-format": "./node_modules/.bin/prettier --check .",
+    "format": "./node_modules/.bin/prettier --write .",
+    "lint": "./node_modules/.bin/eslint .",
+    "test": "echo \"TODO: test\"",
+    "clean": "rm -rf node_modules"
   }
 }
