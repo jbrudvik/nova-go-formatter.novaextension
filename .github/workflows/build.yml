@@ -4,8 +4,8 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     defaults:
-    run:
-      working-directory: nova-go-formatter.novaextension
+      run:
+        working-directory: nova-go-formatter.novaextension
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
