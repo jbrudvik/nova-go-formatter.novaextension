@@ -1,3 +1,7 @@
+## Version 0.0.9
+
+Internal changes: Simplify extension development
+
 ## Version 0.0.8
 
 Fix bug where format on save was causing dirty buffer
