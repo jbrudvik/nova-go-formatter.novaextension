@@ -1,0 +1,13 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "cd nova-go-formatter.novaextension && npm install && npm run format && npm run lint && npm test"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "cd nova-go-formatter.novaextension && npm run clean"
+    }
+  },
+  "openLogOnRun" : "start"
+}
