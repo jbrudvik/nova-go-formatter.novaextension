@@ -3,7 +3,7 @@ function stringPreview(s, previewLength) {
 }
 
 function basename(str) {
-return str.substr(str.lastIndexOf("/") + 1);
+  return str.substr(str.lastIndexOf("/") + 1);
 }
 
 function displayError(message) {
