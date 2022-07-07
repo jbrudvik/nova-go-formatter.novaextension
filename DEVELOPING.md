@@ -15,11 +15,28 @@ The actual code for the extension sits in `nova-go-formatter.novaextension`. Ope
 
 ## Before committing
 
-- Format JavaScript files with Prettier
-  - Prettier can be run inside Nova using [Prettier for Nova](https://extensions.panic.com/extensions/alexanderweiss/alexanderweiss.prettier/)
-- Fix any ESLint issues
-  - ESLint can be run inside Nova using [ESLint Extension for Nova](https://extensions.panic.com/extensions/apexskier/apexskier.eslint/)
-  - Alternatively, you may view ESLint issues on the command line: `$ ./node_modules/.bin/eslint . `
+```sh
+# Format all code correctly
+$ npm run format
+
+# Ensure code is free of common mistakes
+$ npm run lint
+
+# Ensure all tests pass
+$ npm test
+```
+
+## Developing with Nova
+
+### Included tasks
+
+- Build (`cmd+b`): Install dependencies, format, lint, test
+- Clean (`shift+cmd+k`): Prepare for release
+
+### Useful extensions
+
+- [Prettier for Nova](https://extensions.panic.com/extensions/alexanderweiss/alexanderweiss.prettier/): Run Prettier on save
+- [ESLint Extension for Nova](https://extensions.panic.com/extensions/apexskier/apexskier.eslint/): Show ESLint errors as Nova Issues
 
 ## Manual testing
 
@@ -47,7 +64,8 @@ Variables for usage paths:
 
 Releases are manually created with these steps:
 
-1. Delete `node_modules/` and `package-lock.json`
+1. Push any changes to GitHub and Ensure build is passing: [![Build](https://github.com/jbrudvik/nova-go-formatter/actions/workflows/build.yml/badge.svg)](https://github.com/jbrudvik/nova-go-formatter/actions/workflows/build.yml)
+1. `$ npm run clean`
 1. Increment the version in `extension.json`
 1. Update the release notes in `CHANGELOG.md`
 1. Make any necessary updates to `README.md`. This contains the user-facing documentation in the Nova Extension Library.
