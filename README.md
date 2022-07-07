@@ -1,4 +1,4 @@
-**Go Formatter** formats [Go](https://go.dev) code using [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports) or [`gofmt`](https://pkg.go.dev/cmd/gofmt).
+[Go Formatter](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/) formats [Go](https://go.dev) code using [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports) or [`gofmt`](https://pkg.go.dev/cmd/gofmt).
 
 There are three ways to run Go Formatter:
 
