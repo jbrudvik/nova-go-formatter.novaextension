@@ -37,7 +37,7 @@ function getFormatterProcess() {
     resolve = _resolve;
   });
 
-  let goimportsCommand = "goimports";
+  const goimportsCommand = "goimports";
   const gofmtCommand = "gofmt";
   const goimportsProcess = new Process("/usr/bin/env", {
     args: [goimportsCommand],
