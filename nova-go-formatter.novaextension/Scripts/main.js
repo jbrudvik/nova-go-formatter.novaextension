@@ -186,6 +186,7 @@ function formatGoCodeInEditorOnSave(editor) {
   if (formatGoFilesOnSave) {
     return formatGoCodeInEditor(editor);
   }
+  return Promise.resolve();
 }
 
 exports.activate = async () => {
