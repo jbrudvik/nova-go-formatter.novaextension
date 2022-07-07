@@ -1,11 +1,5 @@
 # Developing
 
-## Getting started
-
-### Open the code that matters
-
-The actual code for the extension sits in `nova-go-formatter.novaextension`. Open that code in a Nova project.
-
 ### Required dependencies
 
 - Install [Node.js](https://nodejs.org/en/download/)
