@@ -27,7 +27,7 @@ To use `gofmt`:
 
 If Go Formatter fails to run, error messages will be shown as a Nova notification. If you run into an issue that you think Go Formatter should handle, please [submit a bug report](https://github.com/jbrudvik/nova-go-formatter/issues).
 
-## Install
+## Installing
 
 [Go Formatter at Nova's Extension Library](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/)
 
