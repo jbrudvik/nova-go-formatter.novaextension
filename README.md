@@ -2,6 +2,8 @@
 
 [Go Formatter](https://extensions.panic.com/extensions/me.brudvik/me.brudvik.nova-go-formatter/) formats [Go](https://go.dev) code using [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports) or [`gofmt`](https://pkg.go.dev/cmd/gofmt).
 
+[![Build](https://github.com/jbrudvik/nova-go-formatter.novaextension/actions/workflows/build.yml/badge.svg)](https://github.com/jbrudvik/nova-go-formatter.novaextension/actions/workflows/build.yml)
+
 There are three ways to run Go Formatter:
 
 - **On save**: When a Go file is saved, it will automatically be formatted
